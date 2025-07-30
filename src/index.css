@@ -1,15 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* SIO Health Tech Design System - Healthcare-friendly teal palette */
 
 @layer base {
   :root {
+    /* SIO Brand Colors */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 184 100% 15%;
+    
+    /* Healthcare Teal Palette */
+    --primary: 189 85% 43%;        /* #1CA9C9 - Teal Blue */
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 174 44% 51%;   /* Lighter teal */
+    --primary-glow: 174 100% 85%;   /* Very light teal for glows */
+    
+    --secondary: 174 44% 94%;       /* #E3F6F5 - Pale Aqua */
+    --secondary-foreground: 184 100% 15%;
+    
+    --accent: 174 50% 82%;          /* #B2DFDB - Mint */
+    --accent-foreground: 184 100% 15%;
+    
+    --muted: 0 0% 96.5%;            /* #F6F6F6 - Off White */
+    --muted-foreground: 184 20% 40%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 184 100% 15%;
+    
+    /* Healthcare UI Elements */
+    --border: 174 44% 90%;
+    --input: 174 44% 94%;
+    --ring: 189 85% 43%;
+    
+    /* Status Colors */
+    --success: 142 76% 36%;
+    --warning: 45 93% 47%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(189, 85%, 43%), hsl(174, 44%, 51%));
+    --gradient-secondary: linear-gradient(180deg, hsl(174, 44%, 94%), hsl(0, 0%, 100%));
+    --gradient-hero: linear-gradient(135deg, hsl(189, 85%, 43%) 0%, hsl(174, 44%, 51%) 50%, hsl(174, 100%, 85%) 100%);
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px hsl(189, 85%, 43%, 0.1);
+    --shadow-medium: 0 8px 30px hsl(189, 85%, 43%, 0.15);
+    --shadow-glow: 0 0 40px hsl(174, 100%, 85%, 0.6);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    --radius: 12px;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -56,8 +102,8 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 184 100% 4%;
+    --foreground: 174 44% 94%;
 
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
@@ -65,24 +111,29 @@ All colors MUST be HSL.
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 189 85% 43%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 174 44% 51%;
+    --primary-glow: 174 100% 85%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 184 30% 20%;
+    --secondary-foreground: 174 44% 94%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 184 30% 15%;
+    --muted-foreground: 174 20% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 184 30% 25%;
+    --accent-foreground: 174 44% 94%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 184 30% 25%;
+    --input: 184 30% 20%;
+    --ring: 189 85% 43%;
+    
+    --card: 184 30% 15%;
+    --card-foreground: 174 44% 94%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -100,6 +151,101 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
   }
+}
+
+/* Custom Components */
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary to-primary-light text-primary-foreground hover:shadow-lg hover:scale-105 transition-all duration-300 font-medium;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-accent transition-colors duration-300;
+  }
+  
+  .card-glass {
+    @apply bg-white/80 backdrop-blur-lg border border-white/20 shadow-soft;
+  }
+  
+  .gradient-bg {
+    background: var(--gradient-hero);
+  }
+  
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .glow-effect {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .floating-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.6s ease-out;
+}
+
+.animate-zoomIn {
+  animation: zoomIn 0.4s ease-out;
+}
+
+/* Stagger animations */
+.stagger-children > * {
+  animation-delay: calc(var(--stagger) * 0.1s);
+}
 }
