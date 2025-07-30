@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Scan, MessageCircle, MapPin, User, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 import sioLogo from '@/assets/sio-logo.png';
 
 const Navbar = () => {
@@ -18,7 +19,7 @@ const Navbar = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-lg border-b border-border shadow-soft">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-lg border-b border-border shadow-soft">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -49,7 +50,8 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Logout */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3">
+            <ThemeToggle />
             <Button variant="outline" size="sm" className="flex items-center space-x-2">
               <LogOut size={16} />
               <span>Logout</span>
@@ -57,20 +59,22 @@ const Navbar = () => {
           </div>
 
           {/* Mobile menu button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="md:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={20} /> : <Menu size={20} />}
-          </Button>
+          <div className="md:hidden flex items-center space-x-2">
+            <ThemeToggle />
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
+            </Button>
+          </div>
         </div>
       </div>
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-lg border-b border-border animate-fadeInUp">
+        <div className="md:hidden bg-background/95 backdrop-blur-lg border-b border-border animate-fadeInUp">
           <div className="px-4 py-4 space-y-2">
             {navItems.map((item) => {
               const Icon = item.icon;

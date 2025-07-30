@@ -88,9 +88,11 @@ const ProfilePage = () => {
                 {/* Profile Picture */}
                 <div className="flex items-center space-x-4">
                   <div className="relative">
-                    <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-2xl font-bold">
-                      {profile.name.split(' ').map(n => n[0]).join('')}
-                    </div>
+                    <img 
+                      src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" 
+                      alt="Profile" 
+                      className="w-20 h-20 rounded-full object-cover border-2 border-primary/20"
+                    />
                     {isEditing && (
                       <Button size="sm" className="absolute -bottom-2 -right-2 h-8 w-8 rounded-full p-0">
                         <Camera size={14} />

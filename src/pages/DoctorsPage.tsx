@@ -22,6 +22,7 @@ interface Doctor {
   availability: 'available' | 'busy' | 'unavailable';
   nextSlot: string;
   experience: number;
+  image?: string;
 }
 
 const DoctorsPage = () => {
@@ -45,7 +46,8 @@ const DoctorsPage = () => {
       address: '123 Health Street, Medical District',
       availability: 'available',
       nextSlot: 'Today 3:30 PM',
-      experience: 12
+      experience: 12,
+      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80'
     },
     {
       id: '2',
@@ -287,18 +289,27 @@ const DoctorsPage = () => {
                         {/* Doctor Info */}
                         <div className="md:col-span-2 space-y-4">
                           <div className="flex items-start justify-between">
-                            <div>
-                              <h3 className="text-xl font-bold text-foreground">{doctor.name}</h3>
-                              <p className="text-muted-foreground">{doctor.clinic}</p>
-                              <div className="flex items-center space-x-2 mt-1">
-                                <div className="flex items-center space-x-1">
-                                  <Star className="text-warning fill-current" size={16} />
-                                  <span className="font-medium">{doctor.rating}</span>
-                                  <span className="text-muted-foreground text-sm">({doctor.reviews} reviews)</span>
-                                </div>
-                                <span className="text-muted-foreground">•</span>
-                                <span className="text-muted-foreground text-sm">{doctor.experience} years exp.</span>
-                              </div>
+                            <div className="flex items-start space-x-4">
+                              {doctor.image && (
+                                <img 
+                                  src={doctor.image} 
+                                  alt={doctor.name}
+                                  className="w-16 h-16 rounded-full object-cover border-2 border-primary/20"
+                                />
+                              )}
+                               <div>
+                                 <h3 className="text-xl font-bold text-foreground">{doctor.name}</h3>
+                                 <p className="text-muted-foreground">{doctor.clinic}</p>
+                                 <div className="flex items-center space-x-2 mt-1">
+                                   <div className="flex items-center space-x-1">
+                                     <Star className="text-warning fill-current" size={16} />
+                                     <span className="font-medium">{doctor.rating}</span>
+                                     <span className="text-muted-foreground text-sm">({doctor.reviews} reviews)</span>
+                                   </div>
+                                   <span className="text-muted-foreground">•</span>
+                                   <span className="text-muted-foreground text-sm">{doctor.experience} years exp.</span>
+                                 </div>
+                               </div>
                             </div>
                             <Badge className={getAvailabilityColor(doctor.availability)}>
                               {getAvailabilityText(doctor.availability)}
